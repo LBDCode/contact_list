@@ -43,7 +43,6 @@ class App extends Component {
     oldContacts.push(newContact);
 
     this.setState({contacts: oldContacts});
-    console.log(this.state.contacts);
   };
 
   deleteContact = id => {
@@ -71,10 +70,12 @@ class App extends Component {
                 <div className="contact-list">
                   <ListGroup as="ul">
                     {this.state.contacts.map(contact => (
-                      <ListGroup.Item as="li" key={contact.id}> 
-                        {contact.name}
-                        <span className="contact-actions"><span>edit</span> <span onClick={() => this.deleteContact(contact.id)}>delete</span></span>
-                      </ListGroup.Item>
+                        <ListGroup.Item as="li" key={contact.id}> 
+                          <Link to={'/contact/' + contact.id}>
+                            {contact.name}
+                          </Link>
+                          <span className="contact-actions"><span>edit</span> <span onClick={() => this.deleteContact(contact.id)}>delete</span></span>
+                        </ListGroup.Item>
                     ))}
                   </ListGroup>
                 </div>
@@ -89,7 +90,7 @@ class App extends Component {
             />
             <Route exact path="/contact/:id" render={props =>
               <div>
-                <Contact {...props}/>
+                <Contact {...props} contacts={this.state.contacts}/>
               </div> } 
             />
             <Route render={props =>
