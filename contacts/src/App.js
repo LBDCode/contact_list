@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 import Main from "./Pages/Main";
 import Contact from "./Pages/Contact";
 import New from "./Pages/New";
@@ -32,7 +35,7 @@ class App extends Component {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   };
 
-  addContact = (contact) => {
+  addContact = contact => {
     const oldContacts = [...this.state.contacts];
     let newContact = {...contact};
 
@@ -43,24 +46,40 @@ class App extends Component {
     console.log(this.state.contacts);
   };
 
+  deleteContact = id => {
+    const oldContacts = [...this.state.contacts];
+    const newContacts = oldContacts.filter( contact => contact.id !== id );
+    this.setState({contacts: newContacts});
+  }
+
   render() {
     return (
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" render={props =>
-              <div>
-                <Main contacts={this.state.contacts}
-                {...props}
-                />
-              </div> }
-            />
-            <Route exact path="/contacts" render={props =>
-              <div>
-                <Main 
-                contacts={this.state.contacts}
-                {...props}/>
-              </div> }
+            <Route exact path={["/", "/contacts"]} render={props =>
+              <div className="contact-container">
+                <h1>Contacts
+                  <span>
+                    <Button variant="primary" id="add-contact-btn" 
+                      addContact={this.addContact}
+                    >
+                      <Link to={'/contacts/new'} > Add Contact </Link>
+                    </Button>
+                  </span>
+                </h1>
+                <div className="contact-list">
+                  <ListGroup as="ul">
+                    {this.state.contacts.map(contact => (
+                      <ListGroup.Item as="li" key={contact.id}> 
+                        {contact.name}
+                        <span className="contact-actions"><span>edit</span> <span onClick={() => this.deleteContact(contact.id)}>delete</span></span>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                </div>
+              </div>
+              }
             />
             <Route exact path="/contacts/new" render={props =>
               <div>

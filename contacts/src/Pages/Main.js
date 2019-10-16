@@ -11,7 +11,6 @@ class Main extends Component {
     }    
   };
 
-
   render() {
     return (
       <div className="contact-container">
@@ -29,7 +28,7 @@ class Main extends Component {
               {this.state.contacts.map(contact => (
                 <ListGroup.Item as="li" key={contact.id}> 
                   {contact.name}
-                  <span className="contact-actions"><span>edit</span> <span>delete</span></span>
+                  <span className="contact-actions"><span>edit</span> <span onClick={() => this.props.delContact(contact.id)}>delete</span></span>
                 </ListGroup.Item>
               ))}
             </ListGroup>
