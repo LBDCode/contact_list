@@ -26,21 +26,25 @@
 }
 
 .contact-list {
-  max-width: 400px;
-  margin-top: 20px;
+  max-width: 500px;
+  margin: 20px 5px;
 }
 
 .contact-actions{
   float: right;
 }
 
-.add-contact {
+.contact-container {
   max-width: 600px;
   margin: 20px;
 }
 
 .add-form {
   margin: 5px;
+}
+
+.add-form-buttons {
+  margin-right: 10px;
 }
 
 .contact-info {

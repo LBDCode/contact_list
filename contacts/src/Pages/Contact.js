@@ -9,7 +9,7 @@ class Contacts extends Component {
       return (
         <>
             <h1>This is the Contact page!</h1>
-            <div className="contact-info">
+            <div className="contact-container">
               <Card style={{ width: '20rem' }}>
                 <Card.Body>
                   <Card.Title>Name</Card.Title>
