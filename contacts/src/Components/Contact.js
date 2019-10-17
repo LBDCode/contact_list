@@ -36,7 +36,8 @@ class Contacts extends Component {
                     <Card.Title>{this.state.currentContact.name ? this.state.currentContact.name : null}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{this.state.currentContact.email ? this.state.currentContact.email : null}</Card.Subtitle>
                     <Card.Subtitle className="mb-2 text-muted">{this.state.currentContact.number ? this.state.currentContact.number : null}</Card.Subtitle>
-                    {/* <Card.Link href="#">Edit</Card.Link>
+                    {/* add if have time:
+                    <Card.Link href="#">Edit</Card.Link>
                     <Card.Link href="#">Delete</Card.Link> */}
                   </Card.Body>
                 </Card>

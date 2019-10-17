@@ -16,6 +16,7 @@ class NewContact extends Component {
     }    
   };
 
+  // update state based on form input
   handleFormInputChange = event => {
     const{ name, value } = event.target;
     this.setState({
@@ -94,7 +95,6 @@ class NewContact extends Component {
 
             <ButtonToolbar>
               <Button className="add-form-buttons" variant="primary" type="button"
-                // onClick={()=> props.addContact(this.formControl()) }
                 onClick={() => this.handleSubmit(props.addContact)}
               >
                 Save contact
