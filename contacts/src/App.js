@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Contact from "./Components/Contact";
 import New from "./Components/New";
+import Edit from "./Components/Edit";
 import NoMatch from "./Components/NoMatch";
 import './App.css';
 
@@ -33,13 +34,23 @@ class App extends Component {
 
     this.setState({contacts: oldContacts});
   };
+  
+   // get contact info from callback, generate and id, and edit info in this.state.contacts
+   editContact = contactInfo => {
+    const editID = contactInfo.id;
+    const newContacts = [...this.state.contacts];
+    const contactIndex = newContacts.map(function(contact) { return contact.id; }).indexOf(editID);
+    const newContactInfo = {...contactInfo}
+    newContacts[contactIndex] = newContactInfo;
+    this.setState({ contacts: newContacts});
+  }; 
 
   // get id from cb, update state to remove contact
   deleteContact = id => {
     const oldContacts = [...this.state.contacts];
     const newContacts = oldContacts.filter( contact => contact.id !== id );
     this.setState({contacts: newContacts});
-  }
+  };
 
   render() {
     return (
@@ -68,8 +79,15 @@ class App extends Component {
                             <Link to={'/contact/' + contact.id}>
                               {contact.name}
                             </Link>
-                            <span className="contact-actions"><span>edit</span> <span onClick={() => this.deleteContact(contact.id)}>delete</span></span>
-                          </ListGroup.Item>
+                            <span className="contact-actions">
+                              <span>
+                                <Link to={'/edit/' + contact.id}>edit </Link>
+                              </span> 
+                              <span onClick={() => this.deleteContact(contact.id)}>
+                                delete
+                              </span>
+                            </span>
+                          </ListGroup.Item> 
                       ))}
                     </ListGroup>
                     :
@@ -88,6 +106,11 @@ class App extends Component {
             <Route exact path="/contact/:id" render={props =>
               <div>
                 <Contact {...props} contacts={this.state.contacts}/>
+              </div> } 
+            />
+            <Route exact path="/edit/:id" render={props =>
+              <div>
+                <Edit {...props} contacts={this.state.contacts} editContact={this.editContact}/>
               </div> } 
             />
             <Route render={props =>

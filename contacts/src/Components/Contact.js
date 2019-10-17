@@ -14,15 +14,27 @@ class Contacts extends Component {
     }
   }  
 
-    componentDidMount () {
-      console.log(this.props.contacts);
-      const { id } = this.props.match.params;
-      const allContacts = [...this.state.contacts];
-      const curContact = allContacts.filter( contact => contact.id === id );
-      const currentContact = curContact[0];
-      this.setState({ currentContact });
-      console.log(this.state.contacts);
-    };
+  componentDidMount () {
+    console.log(this.props.contacts);
+    const { id } = this.props.match.params;
+    const allContacts = [...this.state.contacts];
+    const curContact = allContacts.filter( contact => contact.id === id );
+    const currentContact = curContact[0];
+    this.setState({ currentContact });
+  };
+
+      // format the phone number
+  formatNumber = (number) => {
+    if (number) {
+      let num = number.replace(/\D/g, '');
+      if(num.length === 10) {
+          let formated = num.match(/^(\d{3})(\d{3})(\d{4})$/);
+          return '(' + formated[1] + ') ' + formated[2] + '-' + formated[3];
+      } else {
+          return num;
+      } 
+    }
+  };
 
   
     render() {
@@ -35,7 +47,7 @@ class Contacts extends Component {
                   <Card.Body>
                     <Card.Title>{this.state.currentContact.name ? this.state.currentContact.name : null}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{this.state.currentContact.email ? this.state.currentContact.email : null}</Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">{this.state.currentContact.number ? this.state.currentContact.number : null}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">{this.state.currentContact.number ? this.formatNumber(this.state.currentContact.number) : null}</Card.Subtitle>
                     {/* add if have time:
                     <Card.Link href="#">Edit</Card.Link>
                     <Card.Link href="#">Delete</Card.Link> */}
