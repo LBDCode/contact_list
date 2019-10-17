@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Contact from "./Pages/Contact";
-import New from "./Pages/New";
-import NoMatch from "./Pages/NoMatch";
+import Contact from "./Components/Contact";
+import New from "./Components/New";
+import NoMatch from "./Components/NoMatch";
 import './App.css';
 
 class App extends Component {
