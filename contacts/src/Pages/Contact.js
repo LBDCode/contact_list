@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
@@ -42,6 +44,11 @@ class Contacts extends Component {
                 <h5>something seems to have gone wrong</h5>
             
             }
+              <Button variant="primary" id="back-home-button" 
+              >
+                <Link to={'/'} id="add-contact-link"> Back to Contacts </Link>
+              </Button>
+
             </div>
               
         </>
